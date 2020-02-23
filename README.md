@@ -1,4 +1,5 @@
-# Intro-to-Shell
+# Introduction to Shell
+
 
 ## Find Location
 __`pwd` __ show current location 
@@ -73,7 +74,6 @@ __`wc`__ : word count
 | **w**ords | `-w` | 
 | **l**ines i |`-l`| 
 
-
 ## Sort 
 __`sort`__: puts data in order
 | flag | meaning |
@@ -110,7 +110,97 @@ The pipe symbol tells the shell to use the output of the command on the left as 
 |`[...]` |matches any one of the __characters__ inside the square brackets | `201[78].txt`  matches  `2017.txt`  or  `2018.txt`
 |`{...}` |matches any of the comma-separated __patterns__ inside the curly brackets| `{*.txt, *.csv}`  matches any file whose name ends with  `.txt`  or  `.csv`| 
 
+##  Variables 
+|Type | Def|
+|--|--|
+| **environment variables** |those that are available all the time, in __UPPER CASE__  |
+|**shell variables** | assign by `=` , called by adding `$` to it   | 
+
+#### Common environment varaibles 
+|Variable Name |Purpose |  
+|--|--| 
+|`HOME`|User's home directory | 
+|`PWD`|Present working directory| 
+| `SHELL` | Which shell program is being used| 
+| `USER` | User's ID | 
+To get a complete list (which is quite long), you can type  `set`  in the shell.
+
+
+## Print Variable's value 
+__`echo`__ prints its arguments.
+    -  `echo hello` =》hello 
+    - `echo $USER` => repl ( the value of environment variable value ) 
+
+
+## For Loop 
+`for` ...variable... `in` ...list.../wildcards ; `do` ...body... `; done`
+
+- _Input_ 
+ `for filetype in gif jpg png; do echo $filetype; done`
+- _it produces_
+`
+gif
+jpg
+png
+`
+
+-_Input_
+`for f in seasonal/*.csv; do echo $f ; head -n 2 $f | tail -n 1; done`
+-_it produces_
+`
+seasonal/autumn.csv
+2017-01-05,canine
+seasonal/spring.csv
+2017-01-25,wisdom
+seasonal/summer.csv
+2017-01-11,canine
+seasonal/winter.csv
+2017-01-03,bicuspid
+`
+
+
+## Edit file 
+__`nano filename`__ open the file for editing 
+| command | purpose |
+|--|--|
+| `Ctrl`  +  `K` |delete a line | 
+|`Ctrl`  +  `U`| un-delete a line|
+| `Ctrl`  +  `O`| save the file ('O' stands for 'output').  _You will also need to press Enter to confirm the filename!_|
+|`Ctrl`  +  `X`|exit the editor| 
+
+## Record previous steps 
+1.  Run  `history`.
+2.  Pipe its output to  `tail -n 10`  (or however many recent steps you want to save).
+3.  Redirect that to a file called something like  `figure-5.history`.
+
+## Store commands  and Re-run 
+1.  Use  `nano dates.sh`  to create a file called  `dates.sh`  that contains this command:
+   `cut -d , -f 1 seasonal/*.csv`
+2.  Use  __`bash`__  to run the file  `dates.sh`.
+OR `bash dates.sh > dates.out` to run file and save output to a new file `dates.out`
+
+
+## Pass filenames to scripts 
+__`$@`__ all of the command-line parameters given to the script
+__`$1,$2,...`__ specific command-line parameters
+
+-  `unique-lines.sh`  contains  `sort $@ | uniq`, 
+when you run:
+`bash unique-lines.sh seasonal/summer.csv`
+then: 
+the shell replaces  `$@`  with  `seasonal/summer.csv`  and processes one file. 
+
+- `column.sh` contains `cut -d , -f $2 $1` 
+and then run it using:
+`bash column.sh seasonal/autumn.csv 1`
+then:
+the shell replaces   `$1`  with seasonal/autumn.csv, 
+`$2` with 1 
+
+
+## Auto-completion
+__`tab`__  auto completion of file name, if multiple files exists with same first letter, __press tab twice__
+
+
 ## Get help 
 __`man`__ see the manual  of a command 
-
-__`tab`__  auto completion of file name, if multiple files exists with same first letter, __press tab twice__
