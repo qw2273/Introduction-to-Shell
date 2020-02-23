@@ -1,1 +1,116 @@
 # Intro-to-Shell
+
+## Find Location
+__`pwd` __ show current location 
+ 
+ __`ls`__  list all files in the current level  
+__`ls -R`__  shows every file and directory in the current level, then everything in each sub-directory
+__`ls -F -R`__  prints a `/` after the name of every directory and a `*` after the name of every runnable program.
+
+ __`cd + new path`__  move to the new path 
+ 
+ __`..`__  the directory above the one I'm currently in
+- If you are in `/home/repl/seasonal`, then `cd ..` moves you up to `/home/repl` 
+ 
+ __`.`__ the current directory
+-  `cd .`  has no effect to the current location
+
+__`~`__ path of user's home directory
+-  `ls ~` will list the contents of your home directory
+- `cd ~`  give you home location
+- if you are in `/home/repl/seasonal`, then  `cd ~/../.` will take you to `/home/` 
+
+## Copy 
+__`cp`__  make a copy of original file 
+- `cp original.txt duplicate.txt` creates a copy of  `original.txt`  called  `duplicate.txt`. If there already was a file called  `duplicate.txt`, it is overwritten.
+- `cp seasonal/autumn.csv seasonal/winter.csv backup` copies  _all_  of the files into  `backup` directory.
+
+## Move/rename
+
+__`mv`__  
+ 1. move the files to another path 
+ - `mv autumn.csv winter.csv` moves the files  `autumn.csv`  and  `winter.csv`  from the current working directory up _one level to its parent directory_
+ 2. rename files ( __overwriting__ if file name are the same) 
+ - `mv course.txt old-course.txt` then `course.txt` in the current working directory is "moved" to the file `old-course.txt`
+
+##  Delete 
+__`rm`__  romove as many as _files_ you want by specify their paths
+unlike `mv` which can be applied to directories , `rm` can not perfrom this, but instead you need to use __`rmdir`__
+and if you want to create a new directory, use `mkdir`
+
+## View content 
+ 1. __`cat`__  print out the file content  on to the screen 
+
+ 2. If file is large, then use __`less`__ :  
+			* When you  `less`  a file, one page is displayed at a time; you can press spacebar to page down or type  `q`  to quit.
+		* If you give  `less`  the names of __several files__, you can type  `:n`  (colon and a lower-case 'n') to move to the next file,  `:p`  to go back to the previous one, or  `:q`  to quit.
+
+ 3.  __`head`__   if not specify, print out the first 10 lines of a file ;  __`head -n 100`__ display the first 100 lines
+
+4. __`tail -n`__ if not specify n , print out the last 10 lines of a file;  __`tail -n +[Num]`__ output the  starting with [Num]
+
+ 5. __`cut -f + columns no.  -d , file name`__: select columns 
+     - `cut -f 2-5,8 -d , values.csv` which means  select `-f` _columns 2 through 5 and columns 8_ , using (`-d`)  comma `,`  as the separator 
+     - `cut` doesn't understand quoted strings 
+
+## Find matches 
+__`grep`__: selects lines according to what they contain
+	         - `grep bicuspid seasonal/winter.csv` prints lines from `winter.csv` that contain "bicuspid" 
+|flag|usage  |
+|--|--|
+| `-c` |print a _count of matching lines_ rather than the lines themselves|
+|`-h`|do _not_  print the names of files when searching multiple files |
+| `-i` |ignore case (e.g., treat "Regression" and "regression" as matches) | 
+| `-l` |  print the names of files that contain matches, not the matches | 
+| `-n` |  print line numbers for matching lines | 
+| `-v` |  invert the match, i.e., only show lines that  _don't_  match | 
+ 
+## Count records 
+__`wc`__ : word count
+| **if print the number of**| **flag**  |
+|--|--|
+| **c**haracters | `-c`|
+| **w**ords | `-w` | 
+| **l**ines i |`-l`| 
+
+
+## Sort 
+__`sort`__: puts data in order
+| flag | meaning |
+|--|--|
+|`-n` | sort numerically| 
+|`-r` | reverse the order of its output| 
+|`-b` | ignore leading blanks | 
+| `-f` | tells it to **f**old case (i.e., be case-insensitive) | 
+
+## Remove duplicates 
+__`uniq`__: only removes _adjacent_ duplicated lines
+`uniq -c`: display unique lines with a count of how often each occurs
+
+## Repeat command  ！
+`history` print a list of commands you have run recently
+`!command` re-run the most recent use of that command 
+`!55` re-run the 55th command in your history
+
+## Store command's output > 
+__`>`__: store output symbol 
+      - `head -n 5 seasonal/summer.csv > top.csv`：`head`'s output is put in a new file called `top.csv`
+     - `> result.txt head -n 3 seasonal/winter.csv`
+
+## Combine commands  | 
+__`|`__: pip line symbol, send the output from left side as input to left side
+- `head -n 5 seasonal/summer.csv | tail -n 3`: 
+The pipe symbol tells the shell to use the output of the command on the left as the input to the command on the right.
+
+## Wildcards 
+|Wildcards  | match | example |
+|--|--|--| 
+| `*` | match zero or more characters | `s*` will match `spring.csv`  or ` summer.csv` | 
+|`?` | matches a single character| `201?.txt`  will match  `2017.txt`  or  `2018.txt`
+|`[...]` |matches any one of the __characters__ inside the square brackets | `201[78].txt`  matches  `2017.txt`  or  `2018.txt`
+|`{...}` |matches any of the comma-separated __patterns__ inside the curly brackets| `{*.txt, *.csv}`  matches any file whose name ends with  `.txt`  or  `.csv`| 
+
+## Get help 
+__`man`__ see the manual  of a command 
+
+__`tab`__  auto completion of file name, if multiple files exists with same first letter, __press tab twice__
