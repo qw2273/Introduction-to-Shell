@@ -4,7 +4,7 @@
 ## Find Location
 __`pwd` __ show current location 
  
- __`ls`__  list all files in the current level  
+__`ls`__  list all files in the current level  
 __`ls -R`__  shows every file and directory in the current level, then everything in each sub-directory
 __`ls -F -R`__  prints a `/` after the name of every directory and a `*` after the name of every runnable program.
 
@@ -13,8 +13,8 @@ __`ls -F -R`__  prints a `/` after the name of every directory and a `*` after t
  __`..`__  the directory above the one I'm currently in
 - If you are in `/home/repl/seasonal`, then `cd ..` moves you up to `/home/repl` 
  
- __`.`__ the current directory
--  `cd .`  has no effect to the current location
+__`.`__ the current directory
+> `cd .`  has no effect to the current location
 
 __`~`__ path of user's home directory
 -  `ls ~` will list the contents of your home directory
