@@ -189,8 +189,7 @@ __`vi filename`__
 
 |command	|Purpose|
 |--|--| 
- 
-|:w	|save file |
+ |:w	|save file |
 |:q	| exit vim | 
 |:wq|	save and exit |
 |:q!	|don't save and exit | 
