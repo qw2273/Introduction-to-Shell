@@ -168,6 +168,37 @@ __`nano filename`__ open the file for editing
 | `Ctrl`  +  `O`| save the file ('O' stands for 'output').  _You will also need to press Enter to confirm the filename!_|
 |`Ctrl`  +  `X`|exit the editor| 
 
+__`vi filename`__ 
+- after the file is opened, the default mode is *command* mode 
+
+|command	|Purpose|
+|--|--| 
+|dd	|delete a line |
+|yy	|copy a line |
+|p	| paste a line |
+| u | undo |
+|gg | move to the head of file |
+|G| move to the tail of file 
+| /**	| search for ** | 
+
+[MORE COMMANDS]https://www.fprintf.net/vimCheatSheet.html
+
+- press `a` or `i` to begin editing and `esc` to end editing 
+
+- then use `:` to exit vim 
+
+|command	|Purpose|
+|--|--| 
+ 
+|:w	|save file |
+|:q	| exit vim | 
+|:wq|	save and exit |
+|:q!	|don't save and exit | 
+|:25	|relocate to line 25|
+|:set number  | show line number |
+|:set nonumber | conceal the line number |
+
+
 ## Record previous steps 
 1.  Run  `history`.
 2.  Pipe its output to  `tail -n 10`  (or however many recent steps you want to save).
